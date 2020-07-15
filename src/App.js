@@ -18,25 +18,10 @@ function App() {
       easing: "steps(6)",
     },
   });
-  const { ref: bgRef, getAnimation: getBgAnim } = useWebAnimation({
-    keyframes: [
-      {
-        backgroundPosition: 0,
-      },
-      {
-        backgroundPosition: "-500px",
-      },
-    ],
-    timing: {
-      duration: 1000,
-      easing: "linear",
-    },
-  });
 
   const handleKeyDown = (e) => {
     if (e.keyCode === 39) {
       getAnimation().play();
-      getBgAnim().play();
     }
   };
   useEffect(() => {
@@ -47,8 +32,9 @@ function App() {
   }, [handleKeyDown]);
   return (
     <div className="bg">
-      <div src="/cloud.png" ref={bgRef} className="cloud" />
+      <h1>Press Right Arrow to Move</h1>
       <div className="box" ref={ref}></div>
+      <div className="ground"></div>
     </div>
   );
 }

@@ -19,6 +19,13 @@ body {
   z-index: 2;
 }
 
+h1 {
+  position: absolute;
+  text-align: center;
+  left: 35%;
+  color: aliceblue;
+  font-size: 8rem;
+}
 
 .box {
   z-index: 3;
@@ -30,4 +37,12 @@ body {
   height: 152px;
   background-color: transparent;
   background-image: url('/walk.png');
+}
+
+.ground {
+  height: 6rem;
+  background-color: aliceblue;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
