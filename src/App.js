@@ -1,10 +1,9 @@
 import React, { useEffect } from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import useWebAnimation from "@wellyshen/use-web-animations";
 
 function App() {
-  const { ref, animate, getAnimation } = useWebAnimation({
+  const { ref, getAnimation } = useWebAnimation({
     keyframes: [
       {
         backgroundPosition: 0,
@@ -19,17 +18,17 @@ function App() {
     },
   });
 
-  const handleKeyDown = (e) => {
-    if (e.keyCode === 39) {
-      getAnimation().play();
-    }
-  };
   useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.keyCode === 39) {
+        getAnimation().play();
+      }
+    };
     document.addEventListener("keydown", handleKeyDown);
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
     };
-  }, [handleKeyDown]);
+  });
   return (
     <div className="bg">
       <h1>Press Right Arrow to Move</h1>
