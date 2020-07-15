@@ -1,24 +1,54 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import useWebAnimation from "@wellyshen/use-web-animations";
 
 function App() {
+  const { ref, animate, getAnimation } = useWebAnimation({
+    keyframes: [
+      {
+        backgroundPosition: 0,
+      },
+      {
+        backgroundPosition: "624px",
+      },
+    ],
+    timing: {
+      duration: 1000,
+      easing: "steps(6)",
+    },
+  });
+  const { ref: bgRef, getAnimation: getBgAnim } = useWebAnimation({
+    keyframes: [
+      {
+        backgroundPosition: 0,
+      },
+      {
+        backgroundPosition: "-500px",
+      },
+    ],
+    timing: {
+      duration: 1000,
+      easing: "linear",
+    },
+  });
+
+  const handleKeyDown = (e) => {
+    if (e.keyCode === 39) {
+      getAnimation().play();
+      getBgAnim().play();
+    }
+  };
+  useEffect(() => {
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [handleKeyDown]);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="bg">
+      <div src="/cloud.png" ref={bgRef} className="cloud" />
+      <div className="box" ref={ref}></div>
     </div>
   );
 }
